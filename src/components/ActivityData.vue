@@ -1,18 +1,6 @@
 <script setup lang="ts">
-  import axios from "axios";
-  import { ref } from "vue";
-  import { IActivity } from "../interface/IActivity";
-  import { useDataStore } from "../store";
-
-  const activity = ref<IActivity>();
-  const { addRandomData } = useDataStore();
-  const ButtomAddActivity = async () => {
-    const { data } = await axios.get<IActivity>(
-      "https://www.boredapi.com/api/activity"
-    );
-    activity.value = data;
-    addRandomData(data);
-  };
+  import { useRealoadActivity } from "../composable/useRealoadActivity";
+  const { activity, ButtomAddActivity } = useRealoadActivity();
 </script>
 <template>
   <div class="card">
@@ -61,8 +49,3 @@
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-  span {
-    font-family: "Poppins", sans-serif !important;
-  }
-</style>
